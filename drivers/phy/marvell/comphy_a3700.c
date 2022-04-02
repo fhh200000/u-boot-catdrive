@@ -20,29 +20,29 @@ struct comphy_mux_data a3700_comphy_mux_data[] = {
 	{
 		4,
 		{
-			{ PHY_TYPE_UNCONNECTED,	0x0 },
-			{ PHY_TYPE_SGMII1,	0x0 },
-			{ PHY_TYPE_USB3_HOST0,	0x1 },
-			{ PHY_TYPE_USB3_DEVICE,	0x1 }
+			{ COMPHY_TYPE_UNCONNECTED,	0x0 },
+			{ COMPHY_TYPE_SGMII1,	0x0 },
+			{ COMPHY_TYPE_USB3_HOST0,	0x1 },
+			{ COMPHY_TYPE_USB3_DEVICE,	0x1 }
 		}
 	},
 /* Lane 1 */
 	{
 		3,
 		{
-			{ PHY_TYPE_UNCONNECTED,	0x0},
-			{ PHY_TYPE_SGMII0,	0x0},
-			{ PHY_TYPE_PEX0,	0x1}
+			{ COMPHY_TYPE_UNCONNECTED,	0x0},
+			{ COMPHY_TYPE_SGMII0,	0x0},
+			{ COMPHY_TYPE_PEX0,	0x1}
 		}
 	},
 /* Lane 2 */
 	{
 		4,
 		{
-			{ PHY_TYPE_UNCONNECTED,	0x0},
-			{ PHY_TYPE_SATA0,	0x0},
-			{ PHY_TYPE_USB3_HOST0,	0x1},
-			{ PHY_TYPE_USB3_DEVICE,	0x1}
+			{ COMPHY_TYPE_UNCONNECTED,	0x0},
+			{ COMPHY_TYPE_SATA0,	0x0},
+			{ COMPHY_TYPE_USB3_HOST0,	0x1},
+			{ COMPHY_TYPE_USB3_DEVICE,	0x1}
 		}
 	},
 };
@@ -283,10 +283,10 @@ static int comphy_sata_power_up(u32 invert)
 	/*
 	 * 0. Check the Polarity invert bits
 	 */
-	if (invert & PHY_POLARITY_TXD_INVERT)
+	if (invert & COMPHY_POLARITY_TXD_INVERT)
 		data |= bs_txd_inv;
 
-	if (invert & PHY_POLARITY_RXD_INVERT)
+	if (invert & COMPHY_POLARITY_RXD_INVERT)
 		data |= bs_rxd_inv;
 
 	reg_set_indirect(vphy_sync_pattern_reg, data, bs_txd_inv | bs_rxd_inv);
@@ -998,7 +998,7 @@ int comphy_a3700_init(struct chip_serdes_phy_config *chip_cfg,
 						    comphy_map->invert);
 			break;
 
-		case PHY_TYPE_SATA0:
+		case COMPHY_TYPE_SATA0:
 			ret = comphy_sata_power_up(comphy_map->invert);
 			break;
 
